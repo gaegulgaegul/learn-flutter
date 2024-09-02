@@ -1,3 +1,4 @@
+import 'package:app_pomodoros/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class App extends StatelessWidget {
           ),
           cardColor: const Color(0xFFF4EDDB)
       ),
-      home: Container(),
+      home: HomeScreen(),
     );
   }
 }
