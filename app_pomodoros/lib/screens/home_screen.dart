@@ -13,6 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const twentyFiveMinute = 1500;
   int totalSeconds = twentyFiveMinute;
   bool isRunning = false;
+  bool isStarting = false;
   int totalPomodoros = 0;
   late Timer timer;
 
@@ -28,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     setState(() {
       totalSeconds = totalSeconds - 1;
+      isStarting = isStarting || totalSeconds < twentyFiveMinute;
     });
   }
 
@@ -48,6 +50,36 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void onRestartPressed() {
+    if (timer.isActive) {
+      timer.cancel();
+    }
+    setState(() {
+      totalSeconds = twentyFiveMinute;
+      isRunning = true;
+    });
+    timer = Timer.periodic(
+        const Duration(seconds: 1),
+        onTick
+    );
+  }
+
+  void onResetPressed() {
+    timer.cancel();
+    setState(() {
+      totalSeconds = twentyFiveMinute;
+      totalPomodoros = 0;
+      isRunning = false;
+      isStarting = totalSeconds < twentyFiveMinute;
+    });
+  }
+
+  String format(int seconds) {
+    var duration = Duration(seconds: seconds);
+    var time = duration.toString().split('.').first;
+    return time.substring(2);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +87,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           Flexible(
-            flex: 1,
+            flex: 2,
             child: Container(
               alignment: Alignment.bottomCenter,
               child: Text(
-                '$totalSeconds',
+                format(totalSeconds),
                 style: TextStyle(
                   color: Theme.of(context).cardColor,
                   fontSize: 90,
@@ -80,7 +112,29 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ),
           Flexible(
-            flex: 1,
+              flex: 1,
+              child: Center(
+                child: (isRunning || isStarting) ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      iconSize: 60,
+                      color: Theme.of(context).cardColor,
+                      onPressed: onRestartPressed,
+                      icon: const Icon(Icons.restore_outlined),
+                    ),
+                    IconButton(
+                      iconSize: 60,
+                      color: Theme.of(context).cardColor,
+                      onPressed: onResetPressed,
+                      icon: const Icon(Icons.settings_backup_restore_outlined),
+                    ),
+                  ],
+                ) : Container(),
+              )
+          ),
+          Flexible(
+            flex: 2,
             child: Row(
               children: [
                 Expanded(
