@@ -30,14 +30,48 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Flexible(
             flex: 2,
-            child: Container(
-              color: Colors.green,
+            child: Center(
+              child: IconButton(
+                iconSize: 80,
+                color: Theme.of(context).cardColor,
+                onPressed: () {},
+                icon: Icon(Icons.not_started_outlined),
+              ),
             )
           ),
           Flexible(
             flex: 1,
-            child: Container(
-              color: Colors.blue,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(50)
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Pomodoros',
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.displayLarge?.color,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          '0',
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.displayLarge?.color,
+                            fontSize: 60,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             )
           ),
         ],
