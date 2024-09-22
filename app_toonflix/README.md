@@ -1,16 +1,8 @@
-# app_toonflix
+네이버 웹툰 Unofficial API
+==========================
 
-A new Flutter project.
+url: https://webtoon-crawler.nomadcoders.workers.dev
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- `/today`: 오늘의 웹툰 목록
+- `/:id`: ID에 해당하는 웹툰 정보
+- `/:id/episodes`: ID에 해당하는 웹툰 에피소드 목록 반환
