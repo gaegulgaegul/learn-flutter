@@ -9,7 +9,6 @@ class ApiService {
   final String today = "today";
 
   Future<List<WebtoonModel>> getTodaysToons() async {
-    List<WebtoonModel> webtoonInstances = [];
     final url = Uri.parse('$baseUrl/$today');
     final response = await http.get(url);
 
@@ -17,7 +16,8 @@ class ApiService {
       throw Error();
     }
 
-    final List<dynamic> webtoons = jsonDecode(response.body);
+    List<WebtoonModel> webtoonInstances = [];
+    final webtoons = jsonDecode(response.body);
     for (var webtoon in webtoons) {
       webtoonInstances.add(WebtoonModel.fromJson(webtoon));
     }
